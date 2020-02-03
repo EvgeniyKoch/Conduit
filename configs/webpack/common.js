@@ -6,6 +6,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
+    alias: {
+      '@pages': resolve(__dirname, 'src/pages'),
+      '@': resolve(__dirname, 'src'),
+    }
   },
   context: resolve(__dirname, '../../src'),
   module: {

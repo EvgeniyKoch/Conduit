@@ -1,22 +1,22 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import API from '../../api';
+import useFetch from '../../hooks/useFetch';
+
 const Authentication = () => {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
+    const [{ isLoading, response, error }, doFetch] = useFetch(API.USER_LOGIN());
 
-    const map = {
-        email: setEmail,
-        password: setPassword,
-    };
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        map[name](value);
-    };
-
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        doFetch({
+            method: 'post',
+            data: {
+                user: { email, password },
+            },
+        });
     };
 
     return (
@@ -32,7 +32,7 @@ const Authentication = () => {
                             <fieldset>
                                 <fieldset className="form-group">
                                     <input
-                                        onChange={handleChange}
+                                        onChange={e => setEmail(e.target.value)}
                                         type="email"
                                         name="email"
                                         className="form-control form-control-lg"
@@ -42,7 +42,7 @@ const Authentication = () => {
                                 </fieldset>
                                 <fieldset className="form-group">
                                     <input
-                                        onChange={handleChange}
+                                        onChange={e => setPassword(e.target.value)}
                                         name="password"
                                         type="password"
                                         className="form-control form-control-lg"
@@ -50,7 +50,7 @@ const Authentication = () => {
                                         value={password}
                                     />
                                 </fieldset>
-                                <button type="submit" className="btn btn-lg btn-primary pull-xs-right">
+                                <button disabled={isLoading} type="submit" className="btn btn-lg btn-primary pull-xs-right">
                                     Sign In
                                 </button>
                             </fieldset>

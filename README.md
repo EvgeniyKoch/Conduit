@@ -1,5 +1,7 @@
 # React Webpack Typescript Conduit App
 
+[![Build Status](https://travis-ci.org/EvgeniyKoch/Conduit.svg?branch=master)](https://travis-ci.org/EvgeniyKoch/Conduit.svg?branch=master)
+
 * **[React](https://facebook.github.io/react/)** (16.x)
 * **[Webpack](https://webpack.js.org/)** (4.x)
 * **[Typescript](https://www.typescriptlang.org/)** (3.x)
