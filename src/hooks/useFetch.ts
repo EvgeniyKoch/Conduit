@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-export default (url: string) => {
-    const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [response, setResponse] = useState(null);
-    const [error, setError] = useState(null);
+import { ResponseType, ErrorType, ReturnUseFetchType, isLoadingType } from './types';
+
+export default (url: string): ReturnUseFetchType => {
+    const [isLoading, setIsLoading] = useState<isLoadingType>(false);
+    const [response, setResponse] = useState<ResponseType>(null);
+    const [error, setError] = useState<ErrorType>(null);
     const [fetchOptions, setFetchOptions] = useState({});
 
     const doFetch = (config = {}) => {
@@ -24,7 +26,7 @@ export default (url: string) => {
                 setResponse(res.data);
             })
             .catch((e) => {
-                console.warn(e, 'error');
+                console.warn(e.response.data, 'error');
                 setIsLoading(false);
                 setError(e.response.data);
             });
