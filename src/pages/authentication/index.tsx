@@ -1,22 +1,27 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 
 import API from '../../api';
 import useFetch from '../../hooks/useFetch';
 import useLocalStorage from '../../hooks/useLocalStorage';
+import { CurrentUserContext } from '../../context/currentUserContext';
+import BackendErrorMessages from '../../components/BackendErrorMessages';
 
 const Authentication = (props) => {
     const isLogin = props.match.path === '/login';
     const pageTitle = isLogin ? 'Sing In' : 'Sing Up';
     const descriptionLink = isLogin ? '/register' : '/login';
     const descriptionText = isLogin ? 'Need' : 'Have' ;
+
     const [username, setUserName] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
+    const [isSuccessfulSubmit, setIsSuccessfulSubmit] = useState<boolean>(false);
+
     const apiUrl = isLogin ? API.USER_LOGIN() : API.USER_REGISTER();
-    const [isSuccessfullSubmit, setIsSuccessfullSubmit] = useState<boolean>(false);
-    const [{ isLoading, response, error }, doFetch] = useFetch(apiUrl);
-    const [token, setToken] = useLocalStorage('token');
+    const [{ isLoading, response, error  }, doFetch] = useFetch(apiUrl);
+    const [, setToken] = useLocalStorage('token');
+    const [, setCurrentUserState] = useContext<any>(CurrentUserContext);
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -46,10 +51,16 @@ const Authentication = (props) => {
         }
 
         setToken(response.user.token);
-        setIsSuccessfullSubmit(true);
-    }, [response]);
+        setIsSuccessfulSubmit(true);
+        setCurrentUserState(state => ({
+            ...state,
+            isLoggedIn: true,
+            isLoading: false,
+            currentUser: response.user,
+        }));
+    }, [response, setToken, setCurrentUserState]);
 
-    if (isSuccessfullSubmit) {
+    if (isSuccessfulSubmit) {
         return <Redirect to="/" />;
     }
 
@@ -63,6 +74,7 @@ const Authentication = (props) => {
                             <Link to={descriptionLink}>{descriptionText} an account?</Link>
                         </p>
                         <form onSubmit={handleSubmit}>
+                            {error && <BackendErrorMessages backendErrors={error.errors} />}
                             <fieldset>
                                 {!isLogin && renderUserNameField()}
                                 <fieldset className="form-group">

@@ -1,25 +1,37 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
+import { options } from 'tsconfig-paths/lib/options';
 
-import { ResponseType, ErrorType, ReturnUseFetchType, isLoadingType } from './types';
+import { ErrorType, ReturnUseFetchType, isLoadingType, IConfig } from './types';
+import useLocalStorage from './useLocalStorage';
 
 export default (url: string): ReturnUseFetchType => {
     const [isLoading, setIsLoading] = useState<isLoadingType>(false);
-    const [response, setResponse] = useState<ResponseType>(null);
+    const [response, setResponse] = useState<null>(null);
     const [error, setError] = useState<ErrorType>(null);
     const [fetchOptions, setFetchOptions] = useState({});
+    const [token] = useLocalStorage('token');
 
-    const doFetch = (config = {}) => {
+    const doFetch = useCallback((config: IConfig = {}) => {
         setFetchOptions(config);
         setIsLoading(true);
-    };
+    }, []);
 
     useEffect(() => {
+        const requestOptions = {
+            ...fetchOptions,
+            ...{
+                headers: {
+                    authorization: token ? `Token ${token}` : '',
+                },
+            },
+        };
+
         if (!isLoading) {
             return;
         }
 
-        axios(url, fetchOptions)
+        axios(url, requestOptions)
             .then((res) => {
                 console.log(res, 'res');
                 setIsLoading(false);
@@ -30,7 +42,7 @@ export default (url: string): ReturnUseFetchType => {
                 setIsLoading(false);
                 setError(e.response.data);
             });
-    }, [isLoading]);
+    }, [isLoading, options, url, token]);
 
     return [{ isLoading, response, error }, doFetch];
 };
