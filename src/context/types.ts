@@ -12,14 +12,14 @@ export interface IUser {
 }
 
 export interface IState {
-    isLoggedIn: null | boolean;
-    isLoading: null | boolean;
+    isLoggedIn?: null | boolean;
+    isLoading?: null | boolean;
     currentUser?: null | IUser;
 }
 
 export interface IContext {
-    isLoggedIn: null | boolean;
-    isLoading: null | boolean;
+    isLoggedIn?: null | boolean;
+    isLoading?: null | boolean;
     currentUser?: null | IUser;
     setState: Dispatch<SetStateAction<IContext>>;
 }

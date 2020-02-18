@@ -86,7 +86,7 @@
         "allowArrowFunctions": true
       }
     ],
-    "jsx-no-multiline-js": true,
+    "jsx-no-multiline-js": false,
     "jsx-no-string-ref": true,
     "jsx-space-before-trailing-slash": true,
     "jsx-wrap-multiline": true,

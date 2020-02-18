@@ -20,7 +20,7 @@ const CurrentUserChecker = ({ children }) => {
             return;
         }
 
-        doFetch({});
+        doFetch();
         setCurrentUserState(state => ({
             ...state,
             isLoading: true,

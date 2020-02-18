@@ -15,7 +15,7 @@ const initialContext: IContext = {
 export const CurrentUserContext = createContext([{}, (state: IState): void => {}]);
 
 export const CurrentUserProvider = ({ children }: IProps) => {
-    const [state, setState] = useState<IContext>(initialContext);
+    const [state, setState] = useState(initialContext);
 
     return (
         <CurrentUserContext.Provider value={[state, setState]}>

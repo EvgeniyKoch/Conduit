@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
-import { options } from 'tsconfig-paths/lib/options';
 
 import { ErrorType, ReturnUseFetchType, isLoadingType, IConfig } from './types';
 import useLocalStorage from './useLocalStorage';
@@ -42,7 +41,7 @@ export default (url: string): ReturnUseFetchType => {
                 setIsLoading(false);
                 setError(e.response.data);
             });
-    }, [isLoading, options, url, token]);
+    }, [isLoading, fetchOptions, url, token]);
 
     return [{ isLoading, response, error }, doFetch];
 };
