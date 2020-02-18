@@ -1,8 +1,6 @@
 # React Webpack Typescript Conduit App
 
-[![Maintainability](https://api.codeclimate.com/v1/badges/93f1b4f5cec9a17e0683/maintainability)](https://codeclimate.com/github/EvgeniyKoch/Conduit/maintainability)
-
-[![Build Status](https://travis-ci.org/EvgeniyKoch/Conduit.svg?branch=master)](https://travis-ci.org/EvgeniyKoch/Conduit.svg?branch=master)
+[![Maintainability](https://api.codeclimate.com/v1/badges/93f1b4f5cec9a17e0683/maintainability)](https://codeclimate.com/github/EvgeniyKoch/Conduit/maintainability)[![Build Status](https://travis-ci.org/EvgeniyKoch/Conduit.svg?branch=master)](https://travis-ci.org/EvgeniyKoch/Conduit.svg?branch=master)
 
 * **[React](https://facebook.github.io/react/)** (16.x)
 * **[Webpack](https://webpack.js.org/)** (4.x)
