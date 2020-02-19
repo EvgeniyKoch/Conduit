@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-import API from '../../api';
+import { API } from '../../api';
 import ErrorMessage from '../../components/ErrorMessage';
 import FeedToggled from '../../components/FeedToggled';
 import Loading from '../../components/Loading';
@@ -12,7 +12,7 @@ import { getPagination, LIMIT } from '../../utils';
 
 const YourFeed = ({ location, match }) => {
     const { currentPage, offset } = getPagination(location.search);
-    const [{ isLoading, response, error }, doFetch] = useFetch(API.GET_ARTICLES(LIMIT, offset));
+    const [{ isLoading, response, error }, doFetch] = useFetch(API.GET_FEED(LIMIT, offset));
 
     useEffect(() => {
         doFetch();
@@ -53,4 +53,3 @@ const YourFeed = ({ location, match }) => {
 };
 
 export default YourFeed;
-

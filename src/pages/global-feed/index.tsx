@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-import API from '../../api';
+import { API } from '../../api';
 import ErrorMessage from '../../components/ErrorMessage';
 import FeedToggled from '../../components/FeedToggled';
 import Loading from '../../components/Loading';

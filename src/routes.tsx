@@ -10,10 +10,10 @@ import YourFeed from './pages/your-feed';
 export default () => (
     <Switch>
         <Route path="/" component={GlobalFeed} exact />
+        <Route path="/articles/:slug" component={Article} />
         <Route path="/feed" component={YourFeed} />
         <Route path="/tags/:slug" component={TagFeed} />
         <Route path="/login" component={Authentication} />
         <Route path="/register" component={Authentication} />
-        <Route path="/articles/:slug" component={Article} />
     </Switch>
 );
