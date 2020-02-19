@@ -10,13 +10,14 @@ import useFetch from '../../hooks/useFetch';
 import Feed from '../../components/Feed';
 import { getPagination, LIMIT } from '../../utils';
 
-const GlobalFeed = ({ location, match }) => {
+const TagFeed = ({ location, match }) => {
+    const { slug: tagName } = match.params;
     const { currentPage, offset } = getPagination(location.search);
-    const [{ isLoading, response, error }, doFetch] = useFetch(API.GET_ARTICLES(LIMIT, offset));
+    const [{ isLoading, response, error }, doFetch] = useFetch(API.GET_ARTICLES(LIMIT, offset, tagName));
 
     useEffect(() => {
         doFetch();
-    }, [doFetch, currentPage]);
+    }, [doFetch, currentPage, tagName]);
 
     const renderFeedWithPagination = () => (
         <>
@@ -38,7 +39,7 @@ const GlobalFeed = ({ location, match }) => {
             <div className="container page">
                 <div className="row">
                     <div className="col-md-9">
-                        <FeedToggled />
+                        <FeedToggled tagName={tagName} />
                         {isLoading && <Loading />}
                         {error && <ErrorMessage />}
                         {!isLoading && response && renderFeedWithPagination()}
@@ -52,4 +53,4 @@ const GlobalFeed = ({ location, match }) => {
     );
 };
 
-export default GlobalFeed;
+export default TagFeed;

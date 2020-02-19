@@ -10,7 +10,7 @@ import useFetch from '../../hooks/useFetch';
 import Feed from '../../components/Feed';
 import { getPagination, LIMIT } from '../../utils';
 
-const GlobalFeed = ({ location, match }) => {
+const YourFeed = ({ location, match }) => {
     const { currentPage, offset } = getPagination(location.search);
     const [{ isLoading, response, error }, doFetch] = useFetch(API.GET_ARTICLES(LIMIT, offset));
 
@@ -52,4 +52,5 @@ const GlobalFeed = ({ location, match }) => {
     );
 };
 
-export default GlobalFeed;
+export default YourFeed;
+

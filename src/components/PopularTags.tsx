@@ -10,7 +10,7 @@ const PopularTags = () => {
     const [{ isLoading, response, error }, doFetch] = useFetch(API.GET_TAGS());
     useEffect(() => doFetch(), [doFetch]);
 
-    if (isLoading || !response  ) {
+    if (isLoading || !response) {
         return <Loading />;
     }
 

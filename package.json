@@ -1,6 +1,7 @@
 {
-  "name": "react-webpack-typescript-starter",
+  "name": "medium",
   "version": "0.1.0",
+  "private": true,
   "description": "Starter kit for React, Webpack (with Hot Module Replacement), Typescript and Babel.",
   "keywords": [
     "react",
