@@ -21,10 +21,6 @@
         "isolatedModules": true,
         "downlevelIteration": true
     },
-    "paths": {
-      "@pages": ["src/pages"],
-      "@": ["src"]
-    },
     "include": [
         "./src/**/*"
     ],

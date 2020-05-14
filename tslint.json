@@ -2,7 +2,8 @@
   "extends": [
     "tslint:recommended",
     "tslint-config-airbnb",
-    "tslint-react"
+    "tslint-react",
+    "tslint-react-hooks"
   ],
   "linterOptions": {
     "exclude": [
@@ -11,7 +12,9 @@
   },
   "rules": {
     "linebreak-style": false,
-    "ter-indent": [true, 4],
+    "ter-indent": [true, 4, {
+      "SwitchCase": 1
+    }],
     "arrow-body-style": [
       0,
       "always"
@@ -50,7 +53,7 @@
     "no-switch-case-fall-through": true,
     "prefer-conditional-expression": true,
     "prefer-object-spread": true,
-    "switch-default": true,
+    "switch-default": false,
     "cyclomatic-complexity": false, // Question
     "max-file-line-count": [true, 300],
     "no-default-export": false,
@@ -64,7 +67,7 @@
     "no-consecutive-blank-lines": true,
     "no-unnecessary-callback-wrapper": false,
     "prefer-method-signature": true,
-    "prefer-switch": true,
+    "prefer-switch": [true, {"min-cases": 2}],
     "prefer-template": true,
     "type-literal-delimiter": true,
     "ban": [
@@ -90,6 +93,7 @@
     "jsx-no-string-ref": true,
     "jsx-space-before-trailing-slash": true,
     "jsx-wrap-multiline": true,
-    "react/no-access-state-in-setstate": true
+    "react/no-access-state-in-setstate": true,
+    "react-hooks-nesting": "error"
   }
 }

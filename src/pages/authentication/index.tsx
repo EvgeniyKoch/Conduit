@@ -21,8 +21,7 @@ const Authentication = (props) => {
     const apiUrl = isLogin ? API.USER_LOGIN() : API.USER_REGISTER();
     const [{ isLoading, response, error  }, doFetch] = useFetch(apiUrl);
     const [, setToken] = useLocalStorage('token');
-    const [, setCurrentUserState] = useContext<any>(CurrentUserContext);
-
+    const [, dispatch] = useContext(CurrentUserContext);
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const user = isLogin ? { email, password } : { email, password, username };
@@ -52,13 +51,8 @@ const Authentication = (props) => {
 
         setToken(response.user.token);
         setIsSuccessfulSubmit(true);
-        setCurrentUserState(state => ({
-            ...state,
-            isLoggedIn: true,
-            isLoading: false,
-            currentUser: response.user,
-        }));
-    }, [response, setToken, setCurrentUserState]);
+        dispatch({ type: 'SET_AUTHORIZED', payload: response });
+    }, [response, setToken, dispatch]);
 
     if (isSuccessfulSubmit) {
         return <Redirect to="/" />;
